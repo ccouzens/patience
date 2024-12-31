@@ -11,7 +11,7 @@
 
   const toUnicode = ({ suit, rank }: { suit: Suit; rank: Rank }) => {
     const ace = suitChars[suit];
-    return String.fromCodePoint(ace + rank);
+    return String.fromCodePoint(ace + rank + (rank >= 12 ? 1 : 0));
   };
 
   interface Props {
