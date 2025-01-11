@@ -1,5 +1,5 @@
 <script lang="ts">
-import { type CardProps } from "./Card.svelte";
+import Card, { type CardProps } from "./Card.svelte";
 interface Props {
 	/** Top left, cards available to draw */
 	stock: CardProps[];
@@ -22,6 +22,25 @@ interface Props {
 const props = $props();
 </script>
 
-<pre>
+<div class="game">
+	{#each props.stock as card (`${card.suit}-${card.rank}`)}
+		<span>
+		<Card {...card} />
+		</span>
+	{/each}
+	{#each props.waste as card (`${card.suit}-${card.rank}`)}
+		<span>
+		<Card {...card} />
+		</span>
+	{/each}
 	{JSON.stringify(props, null, 2)}
-</pre>
+</div>
+
+<style>
+	.game {
+	position: relative;
+	}
+	.game > span {
+	font-size: 5em;
+	}
+</style>
