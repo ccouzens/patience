@@ -13,6 +13,7 @@ const toUnicode = ({ suit, rank }: { suit: Suit; rank: Rank }) => {
 	const ace = suitChars[suit];
 	return String.fromCodePoint(ace + rank + (rank >= 12 ? 1 : 0));
 };
+const graphics = import.meta.glob("./cards/*.svg", { as: "url", eager: true });
 
 export interface CardProps {
 	/** The suit of the card */
@@ -25,9 +26,12 @@ export interface CardProps {
 
 const { suit, rank, faceUp }: CardProps = $props();
 const char = $derived(faceUp ? toUnicode({ suit, rank }) : cardBackChar);
+const src = $derived(
+	faceUp ? graphics[`./cards/${rank}${suit}.svg`] : graphics["./cards/1B.svg"],
+);
 </script>
 
-<div class="card">{char}</div>
+<img src={src} alt={char} />
 
 <style>
 </style>
