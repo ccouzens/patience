@@ -24,25 +24,31 @@ const props = $props();
 
 <div class="game">
 	{#each props.stock as card, index (`${card.suit}-${card.rank}`)}
-		<span class="card" style={`--y: ${index}px; --x: 0px;`}>
-		<Card {...card} />
+		<span class="card" style={`--major-y: 0; --x: 0; --z: ${index};`}>
+			<Card {...card} />
 		</span>
 	{/each}
 	{#each props.waste as card, index (`${card.suit}-${card.rank}`)}
-		<span class="card" style={`--y: ${index}px; --x: 30px;`}>
-		<Card {...card} />
+		<span class="card" style={`--major-y: 0; --x: 1; --z: ${index};`}>
+			<Card {...card} />
 		</span>
 	{/each}
 </div>
 
 <style>
 	.game {
-	position: relative;
+		position: relative;
+		--z: 0;
+		--tableau-down: 0;
+		--tableau-up: 0;
 	}
 	.card {
-	position: absolute;
-	left: 0;
-	top: 0;
-	transform: translate(var(--x), var(--y));
+		position: absolute;
+		left: 0;
+		top: 0;
+		transform: translate(
+			calc(var(--z) * 2px + var(--x) * 100px),
+			calc(var(--z) * 2px)
+		);
 	}
 </style>
