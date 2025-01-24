@@ -23,24 +23,26 @@ const props = $props();
 </script>
 
 <div class="game">
-	{#each props.stock as card (`${card.suit}-${card.rank}`)}
-		<span>
+	{#each props.stock as card, index (`${card.suit}-${card.rank}`)}
+		<span class="card" style={`--y: ${index}px; --x: 0px;`}>
 		<Card {...card} />
 		</span>
 	{/each}
-	{#each props.waste as card (`${card.suit}-${card.rank}`)}
-		<span>
+	{#each props.waste as card, index (`${card.suit}-${card.rank}`)}
+		<span class="card" style={`--y: ${index}px; --x: 30px;`}>
 		<Card {...card} />
 		</span>
 	{/each}
-	{JSON.stringify(props, null, 2)}
 </div>
 
 <style>
 	.game {
 	position: relative;
 	}
-	.game > span {
-	font-size: 5em;
+	.card {
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translate(var(--x), var(--y));
 	}
 </style>

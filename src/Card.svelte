@@ -9,6 +9,9 @@ const suitChars: Record<Suit, number> = {
 	spades: 0x1f0a0,
 };
 
+const WIDTH = "2.5in";
+const HEIGHT = "3.5in";
+
 const toUnicode = ({ suit, rank }: { suit: Suit; rank: Rank }) => {
 	const ace = suitChars[suit];
 	return String.fromCodePoint(ace + rank + (rank >= 12 ? 1 : 0));
@@ -31,7 +34,11 @@ const src = $derived(
 );
 </script>
 
-<img src={src} alt={char} />
+<img src={src} alt={char} width={WIDTH} height={HEIGHT} />
 
 <style>
+	img {
+		width: calc(100% / 7);
+		height: unset;
+	}
 </style>
