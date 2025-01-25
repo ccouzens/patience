@@ -19,7 +19,20 @@ interface Props {
 	waste: CardProps[];
 }
 
-const props = $props();
+const props: Props = $props();
+
+const tableauHiddens = $derived.by(() => {
+	return props.tableau.map((stack) => {
+		let i = 0;
+		for (const c of stack) {
+			if (c.faceUp) {
+				break;
+			}
+			i++;
+		}
+		return i;
+	});
+});
 </script>
 
 <div class="game">
@@ -32,6 +45,23 @@ const props = $props();
 		<span class="card" style={`--major-y: 0; --x: 1; --z: ${index};`}>
 			<Card {...card} />
 		</span>
+	{/each}
+	{#each props.tableau as stack, i}
+		{#each stack as card, j (`${card.suit}-${card.rank}`)}
+			<span
+				class="card"
+				style={`--major-y:1; --x:${i}; --tableau-down:${Math.min(j, tableauHiddens[i])};--tableau-up:${Math.max(0, j - tableauHiddens[i])}`}
+			>
+				<Card {...card} />
+			</span>
+		{/each}
+	{/each}
+	{#each props.foundations as stack, i}
+		{#each stack as card, j (`${card.suit}-${card.rank}`)}
+			<span class="card" style={`--major-y:0;--x:${i + 3};--z:${j};`}>
+				<Card {...card} />
+			</span>
+		{/each}
 	{/each}
 </div>
 
@@ -48,7 +78,10 @@ const props = $props();
 		top: 0;
 		transform: translate(
 			calc(var(--z) * 2px + var(--x) * 100px),
-			calc(var(--z) * 2px)
+			calc(
+				var(--z) * 2px + var(--major-y) * 100px + var(--tableau-down) *
+					5px + var(--tableau-up) * 20px
+			)
 		);
 	}
 </style>

@@ -77,13 +77,14 @@ const { Story } = defineMeta({
 			],
 			[{ suit: "hearts", rank: 4, faceUp: true }],
 		],
-		foundation: [
+		foundations: [
 			[{ suit: "spades", rank: 1, faceUp: true }],
 			[
 				{ suit: "clubs", rank: 1, faceUp: true },
 				{ suit: "clubs", rank: 2, faceUp: true },
 				{ suit: "clubs", rank: 3, faceUp: true },
 			],
+			[],
 			[
 				{ suit: "diamonds", rank: 1, faceUp: true },
 				{ suit: "diamonds", rank: 2, faceUp: true },
