@@ -1,6 +1,6 @@
 <script lang="ts">
 import Card, { type CardProps } from "./Card.svelte";
-interface Props {
+export interface Props {
 	/** Top left, cards available to draw */
 	stock: CardProps[];
 	/** 7 groups of cards on the table */
@@ -83,5 +83,6 @@ const tableauHiddens = $derived.by(() => {
 					5px + var(--tableau-up) * 20px
 			)
 		);
+		transition: transform 4s;
 	}
 </style>

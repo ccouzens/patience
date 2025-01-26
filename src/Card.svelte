@@ -1,6 +1,6 @@
 <script lang="ts">
-type Suit = "clubs" | "diamonds" | "hearts" | "spades";
-type Rank = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
+import type { Rank, Suit } from "./Card";
+
 const cardBackChar = "🂠";
 const suitChars: Record<Suit, number> = {
 	clubs: 0x1f0d0,
